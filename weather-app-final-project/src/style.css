@@ -1,0 +1,60 @@
+body {
+    font-family: sans-serif;
+    }
+    h1 {
+    color: black;
+    font-size: 24px;
+    font-weight: 100;
+    line-height: 28px;
+    margin: 0;
+    }
+    li {
+    color: black;
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 1;
+    height: 20px;
+    list-style: none;
+    }
+    ul {
+    margin: 5px;
+    padding: 0;
+    }
+
+    .weather-app-wrapper {
+        margin: 20px auto;
+        max-width: 600px;
+    }
+
+    .weather-app {
+    background: radial-gradient(
+    circle at 10% 20%,
+    rgba(91, 173, 254, 0.46) 0%,
+    rgba(91, 224, 254, 0.46) 47.2%,
+    rgba(170, 254, 235, 0.43) 90%
+    );
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    }
+    .temp {
+    color: black;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1;
+    }
+    .units {
+    position: relative;
+    top: -5px;
+    }
+    .search-form {
+    margin-bottom: 10px;
+    }
+    
+    
+    .forecast {
+    position: relative;
+    }
+    
