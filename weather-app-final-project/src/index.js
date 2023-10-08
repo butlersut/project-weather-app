@@ -28,32 +28,55 @@ function formatDate(date) {
     }
 
     
+function formatDay(timestamp) {
+let date = new Date (timestamp*1000);
+let day = date.getDay();
+let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+
+return days[day];
+
+}
+
+
+
     function displayForecast(response) {
+        console.log(response.data);
 let forecast = response.data.daily;
+
 
         let forecastElement = document.querySelector(".forecast");
 
 let forecastHTML = `<div class="row">`;
-forecast.forEach(function(forecastDay) {
+forecast.forEach(function(forecastDay, index) {
+if (index < 6) {
 
 forecastHTML = forecastHTML + 
 ` 
 <div class="col-2">
 
-<div class="forcast-date">${forecastDay.dt}</div>
+<div class="forcast-date">${formatDay(forecastDay.dt)}</div>
 <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="42" />
 
 <div class="weather-forcast-temp">
-    <span class="weather-forcast-temp-max">${forecastDay.temp.max}°</span>
-    <span class="weather-forcast-temp-min">${forecastDay.temp.min}°</span>
+    <span class="weather-forcast-temp-max">${Math.round(forecastDay.temp.max)}°</span>
+    <span class="weather-forcast-temp-min">${Math.round(forecastDay.temp.min)}°</span>
 </div>
 </div>
 
 `;
+}
     });
 
 forecastHTML = forecastHTML + `</div>`
 forecastElement.innerHTML = forecastHTML;
+    }
+
+    function getForecast(coordinates){
+        console.log(coordinates);
+        let apiKey = "452e0992d075db1c0fb2bae7c30f9918";
+        let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&unit=metric`
+    console.log(apiUrl);
+    axios.get(apiUrl).then(displayForecast);
     }
 
     
@@ -69,6 +92,9 @@ forecastElement.innerHTML = forecastHTML;
     );
     document.querySelector("#description").innerHTML =
     response.data.weather[0].main;
+
+
+getForecast(response.data.coord);
     }
     
     
@@ -127,8 +153,7 @@ forecastElement.innerHTML = forecastHTML;
     searchForm.addEventListener("submit", showCurrentLocation);
     
     
-    searchCity("Ottawa");
-    displayForecast();
+    searchCity("Mandeville");
 
     
     
@@ -142,4 +167,6 @@ forecastElement.innerHTML = forecastHTML;
     
     
     
-    iconElement.setAttribute("src", `http://openweather.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+
+
