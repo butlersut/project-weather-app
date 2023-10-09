@@ -71,13 +71,13 @@ forecastHTML = forecastHTML + `</div>`
 forecastElement.innerHTML = forecastHTML;
     }
 
-    function getForecast(coordinates){
+    function getForecast(coordinates) {
         console.log(coordinates);
-        let apiKey = "452e0992d075db1c0fb2bae7c30f9918";
-        let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&unit=metric`
-    console.log(apiUrl);
-    axios.get(apiUrl).then(displayForecast);
-    }
+        let apiKey = "96ad27349a64ea1dcdfbe6f4d458c085";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+        console.log(apiUrl);
+        axios.get(apiUrl).then(displayForecast);
+      }
 
     
     function showWeather(response) {
@@ -92,6 +92,10 @@ forecastElement.innerHTML = forecastHTML;
     );
     document.querySelector("#description").innerHTML =
     response.data.weather[0].main;
+
+    let iconElement = document.querySelector("#icon");
+    iconElement.setAttribute ("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+
 
 
 getForecast(response.data.coord);
@@ -125,21 +129,6 @@ getForecast(response.data.coord);
     navigator.geolocation.getCurrentPosition(searchLocation);
     }
     
-    
-    function convertToFahrenheit(event) {
-    event.preventDefault();
-    let tempElement = document.querySelector("#temp");
-    tempElement.innerHTML = 75;
-    }
-    
-    
-    function convertToCelsius(event) {
-    event.preventDefault();
-    let tempElement = document.querySelector("#temp");
-    tempElement.innerHTML = 24;
-    }
-    
-    
     let dateElement = document.querySelector("#date");
     let currentTime = new Date();
     dateElement.innerHTML = formatDate(currentTime);
@@ -157,16 +146,10 @@ getForecast(response.data.coord);
 
     
     
-    let fahrenheitLink = document.querySelector("#fahrenheit-link");
-    fahrenheitLink.addEventListener("click", convertToFahrenheit);
-    
-    
-    let celsiusLink = document.querySelector("#celsius-link");
-    celsiusLink.addEventListener("click", convertToCelsius);
     
     
     
     
-    iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    
 
 
